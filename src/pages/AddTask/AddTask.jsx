@@ -1,90 +1,130 @@
 import { Helmet } from "react-helmet-async";
-import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import SectionTitle from "../../components/SectionTitle/SectionTitle";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AddTask = () => {
-     const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const axiosSecure = useAxiosSecure();
 
   const onSubmit = async (data) => {
-      const menuItem = {
-        name: data.name,
-        category: data.category,
-        price: parseFloat(data.price),
-        recipe: data.recipe,
-        image: res.data.data.display_url,
-      };
-      const menuRes = await axiosSecure.post("menu", menuItem);
-      if (menuRes.data.insertedId) {
-        reset()
-        Swal.fire({
-          title: "Succecessfully Added an Item!",
-          text: `${data.name} is added to the menu.`,
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-      }
+    const taskItem = {
+      taskTitle: data.taskTitle,
+      taskPriority: data.taskPriority,
+      taskDescription: data.taskDescription,
+      taskDeadline: data.lastDate,
+      taskType: "to-do"
+    };
+    
+    const taskResponse = await axiosSecure.post("/tasks", taskItem);
+    if (taskResponse.data.insertedId) {
+      reset();
+      toast.success("Successfully added task!");
     }
-
+  };
 
   return (
     <>
+      <Helmet>
+        <title>Add Task</title>
+      </Helmet>
       <div>
-        <SectionTitle title={"Add An Items"} subTitle={"---What's new?---"} />
+        <SectionTitle title={"Add Task"} subTitle={"What's new?"} />
       </div>
       <div className="bg-base-200 p-4 ">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label>Recipe name*</label>
+          <label
+            className="block font-medium text-gray-600 dark:text-gray-200"
+            htmlFor="taskTitle"
+          >
+            Task Title<span className="text-red-600">*</span>
+          </label>
           <input
-            placeholder="Recipe name"
-            className="w-full p-3 rounded-lg my-4 "
-            {...register("name", { require: true })}
+            id="taskTitle"
+            placeholder="Task Title"
+            className="w-full p-3 border focus-visible:outline-gray-400  rounded-lg my-4 "
+            {...register("taskTitle", { required: true })}
           />
-          <div className="flex ">
+          {errors.taskTitle && (
+            <span className="text-red-600 mb-3 ">*Task Title is required</span>
+          )}
+          <div className="flex flex-col md:flex-row">
             <div className="flex-1">
-              <label>Category*</label>
+              <label
+                className="block font-medium text-gray-600 dark:text-gray-200"
+                htmlFor="taskPriority"
+              >
+                Task Priority<span className="text-red-600">*</span>
+              </label>
               <div>
                 <select
+                  id="taskPriority"
                   defaultValue="default"
-                  {...register("category", { require: true })}
-                  className="select block my-4 select-bordered w-full max-w-xs"
+                  {...register("taskPriority", { required: true, validate: value => value !== "default" })}
+                  className="select rounded-lg block p-3 my-4 border focus-visible:outline-gray-400 select-bordered w-full max-w-md"
                 >
                   <option disabled value="default">
                     Select a category
                   </option>
-                  <option value="salad">Salad</option>
-                  <option value="pizza">Pizza</option>
-                  <option value="soup">Soup</option>
-                  <option value="dessert">Dessert</option>
-                  <option value="drinks">Drinks</option>
+                  <option value="low">Low</option>
+                  <option value="moderate">Moderate</option>
+                  <option value="high">High</option>
                 </select>
+                {errors.taskPriority && (
+                  <span className="text-red-600 mb-3 ">
+                    *Task Priority is required
+                  </span>
+                )}
               </div>
             </div>
             <div className="flex-1">
-              <label>Price*</label>
+              <label
+                className="block font-medium text-gray-600 dark:text-gray-200"
+                htmlFor="lastDate"
+              >
+                Task Deadline<span className="text-red-600">*</span>
+              </label>
               <input
-                placeholder="Price"
+                id="lastDate"
+                type="datetime-local"
+                placeholder="Task Deadline"
                 className="w-full p-3 rounded-lg my-4 "
-                {...register("price", { require: true })}
+                {...register("lastDate", { required: true })}
               />
+              {errors.lastDate && (
+                <span className="text-red-600 mb-3 ">
+                  *Task Deadline is required
+                </span>
+              )}
             </div>
           </div>
-          <label>Recipe Details*</label>
-          <textarea
-            {...register("recipe", { require: true })}
-            placeholder="Recipe Details"
-            className="textarea w-full block p-3 rounded-lg my-4 textarea-bordered textarea-lg "
-          ></textarea>
-          <div>
-            <input
-              {...register("image", { require: true })}
-              type="file"
-              className="file-input file-input-bordered w-full max-w-xs"
-            />
-          </div>
 
-          <button className="btn btn-active btn-neutral my-4 hover:text-white">
-            Add Item <FaUtensils />
+          <label
+            className="block font-medium text-gray-600 dark:text-gray-200"
+            htmlFor="taskDescription"
+          >
+            Task Desciption<span className="text-red-600">*</span>
+          </label>
+          <textarea
+            id="taskDescription"
+            {...register("taskDescription", { required: true })}
+            placeholder="Recipe Details"
+            className="textarea w-full block p-3 rounded-lg my-3 textarea-bordered textarea-xl resize-none border focus-visible:outline-gray-400"
+          ></textarea>
+          {errors.taskDescription && (
+            <h1 className="text-red-600 mb-3 ">
+              *Task Description is required
+            </h1>
+          )}
+
+          <button className="btn btn-active bg-gradient-to-r hover:bg-gradient-to-l from-sky-600 to-cyan-400 px-4 py-2 rounded-lg text-white">
+            Add Task
           </button>
         </form>
       </div>
