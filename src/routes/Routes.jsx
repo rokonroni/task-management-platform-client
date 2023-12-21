@@ -3,8 +3,9 @@ import Root from "../layout/Root";
 import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Dashboard from "../layout/Dashboard";
-import AddTask from "../pages/AddTask/AddTask";
 import DashBoard from "../pages/Dashboard/Dashboard";
+import ManageTask from "../pages/ManageTask/ManageTask";
+import AddTask from "../pages/AddTask/AddTask";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <DashBoard />
+      },
+      {
+        path: "manageTask",
+        element: <ManageTask />,
       },
       {
         path: "addTask",

@@ -3,6 +3,8 @@ import { RxDashboard } from "react-icons/rx";
 import { CiLogout } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { MdAddTask } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 
 const Sidebar = () => {
   return (
@@ -59,6 +61,21 @@ const Sidebar = () => {
                 >
                   <MdAddTask className="h-5 w-5" />
                   <span className="-mr-1 font-medium">Add Task</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manageTask"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "bg-none"
+                      : isActive
+                      ? "relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
+                      : "relative flex items-center space-x-4 px-4 py-3"
+                  }
+                >
+                  <FaRegEdit  className="h-5 w-5" />
+                  <span className="-mr-1 font-medium">Manage Task</span>
                 </NavLink>
               </li>
               <li>
