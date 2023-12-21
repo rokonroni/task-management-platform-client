@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import Banner from "../../components/Banner/Banner";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Home = () => {
     return (
@@ -6,7 +8,8 @@ const Home = () => {
             <Helmet>
                 <title>Home || Task Management</title>
             </Helmet>
-            Home
+            <Navbar />
+            <Banner />
         </div>
     );
 };

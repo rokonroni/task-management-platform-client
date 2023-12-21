@@ -13,3 +13,13 @@ body {
       transition:all .4s ease-in-out;
     }
   }
+
+#outlet::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+#outlet {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+}
