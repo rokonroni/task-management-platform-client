@@ -5,6 +5,8 @@ import Task from "../../components/Task/Task";
 
 const ToDo = () => {
     const { allTask: allToDoTask, isPending: isPendingToDo, refetch: refetchToDo } = useGetTasks("getToDoTask", "to-do");
+
+    
   return (
     <>
       <div>
@@ -20,7 +22,7 @@ const ToDo = () => {
           {isPendingToDo ? (
             <p className="text-center">Loading...</p>
           ) : (
-            allToDoTask.map((task) => <Task key={task._id} task={task} />)
+            allToDoTask.map((task) => <Task key={task._id} refetch={refetchToDo} task={task} />)
           )}
         </div>
       </div>

@@ -1,12 +1,15 @@
 import { useDrag } from "react-dnd";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure"
+import toast from "react-hot-toast";
+const Task = ({task, refetch}) => {
+  const axiosSecure = useAxiosSecure();
 
-const Task = ({task}) => {
   const formatDate = (dateString) => {
   if (!dateString) {
     return "No deadline"; 
   }
-
   const options = {
     day: "numeric",
     month: "numeric",
@@ -15,7 +18,6 @@ const Task = ({task}) => {
     minute: "numeric",
     hour12: true,
   };
-
   const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
     new Date(dateString)
   );
@@ -29,6 +31,30 @@ const Task = ({task}) => {
       isDragging: !!monitor.isDragging(),
     }),
   });
+
+   const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axiosSecure.delete(`/task/${id}`);
+          if (response.data.deletedCount > 0) {
+            refetch();
+           toast.success("Successfully delete the task")
+          }
+        } catch (error) {
+          console.error("Error deleting meal:", error);
+        }
+      }
+    });
+  };
 
   return (
     <div
@@ -58,7 +84,7 @@ const Task = ({task}) => {
             >
               Update Task
             </Link>
-            <button className="btn btn-active bg-gradient-to-r hover:bg-gradient-to-l from-red-600 to-red-400 px-4 py-2 w-1/2 rounded-lg text-white">
+            <button onClick={()=>handleDelete(task._id)} className="btn btn-active bg-gradient-to-r hover:bg-gradient-to-l from-red-600 to-red-400 px-4 py-2 w-1/2 rounded-lg text-white">
               Delete Task
             </button>
           </div>

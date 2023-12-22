@@ -27,7 +27,6 @@ const UpdateTask = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
 
@@ -40,12 +39,22 @@ const UpdateTask = () => {
       taskAddDate: new Date(),
     };
 
-    const taskResponse = await axiosSecure.patch(`/tasks/${task._id}`, taskItem);
-    if (taskResponse.data.modifiedCount > 0) {
-      
+     try {
+    const taskResponse = await axiosSecure.patch(`/tasks/${id}`, taskItem);
+
+    if (taskResponse.data) {
+      // Check for success or any specific response condition
       toast.success("Successfully updated task!");
+    } else {
+      // Handle error or other conditions
+      toast.error("Failed to update task.");
     }
-  };
+  } catch (error) {
+    // Handle request failure
+    console.error('Error updating task:', error);
+    toast.error("Failed to update task. Please try again later.");
+  }
+};
 
   return (
     <>

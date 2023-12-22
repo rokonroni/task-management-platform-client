@@ -16,8 +16,8 @@ const DashBoard = () => {
               <FaTasks className="text-white text-2xl " />
             </div>
             <div className="mx-5">
-              <h4 className="text-2xl font-semibold text-gray-700">00</h4>
-              <div className="text-gray-500">Today Total Quiz</div>
+              <h4 className="text-2xl font-semibold text-gray-700">Upcoming</h4>
+              <div className="text-gray-500">Today Total Task</div>
             </div>
           </div>
         </div>
@@ -27,8 +27,8 @@ const DashBoard = () => {
               <FaTasks className="text-white text-2xl " />
             </div>
             <div className="mx-5">
-              <h4 className="text-2xl font-semibold text-gray-700">00</h4>
-              <div className="text-gray-500">Today Total Quiz</div>
+              <h4 className="text-2xl font-semibold text-gray-700">Upcoming</h4>
+              <div className="text-gray-500">Complete Task Today</div>
             </div>
           </div>
         </div>

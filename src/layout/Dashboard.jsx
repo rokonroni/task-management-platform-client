@@ -8,7 +8,7 @@ const Dashboard = () => {
       <div className="fixed left-0 top-0 h-screen">
         <Sidebar />
       </div>
-      <div id="outlet" className="flex-1 md:ml-56 px-6  overflow-y-auto">
+      <div id="outlet" className="flex-1 md:ml-60 px-6 ml-10  overflow-y-auto">
         {/* Add a wrapper div to ensure correct application of styles */}
         <div className="h-full">
           <Outlet />

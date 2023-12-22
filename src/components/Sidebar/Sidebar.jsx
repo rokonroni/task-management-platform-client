@@ -3,8 +3,10 @@ import { RxDashboard } from "react-icons/rx";
 import { CiBoxList, CiLogout } from "react-icons/ci";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MdAddTask } from "react-icons/md";
+import { FaListCheck } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import { PiListChecks } from "react-icons/pi";
 
 
 const Sidebar = () => {
@@ -57,6 +59,38 @@ const Sidebar = () => {
                 >
                   <CiBoxList className="h-5 w-5" />
                   <span className="-mr-1 font-medium">To Do Task</span>
+                </NavLink>
+              </li>
+              <li className="min-w-max">
+                <NavLink
+                  to="/dashboard/ongoing"
+                  end={true}
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "bg-none"
+                      : isActive
+                      ? "relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
+                      : "relative flex items-center space-x-4 px-4 py-3"
+                  }
+                >
+                  <FaListCheck className="h-5 w-5" />
+                  <span className="-mr-1 font-medium">Ongoing Task</span>
+                </NavLink>
+              </li>
+              <li className="min-w-max">
+                <NavLink
+                  to="/dashboard/completed"
+                  end={true}
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "bg-none"
+                      : isActive
+                      ? "relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
+                      : "relative flex items-center space-x-4 px-4 py-3"
+                  }
+                >
+                  <PiListChecks className="h-5 w-5" />
+                  <span className="-mr-1 font-medium">Completed Task</span>
                 </NavLink>
               </li>
               <li className="min-w-max">

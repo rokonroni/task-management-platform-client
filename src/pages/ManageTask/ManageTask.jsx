@@ -20,6 +20,7 @@ const axiosSecure = useAxiosSecure();
         await axiosSecure.patch(`/updateTaskType/${taskId}`, { taskType: "ongoing" });
         refetchToDo();
         refetchOngoing();
+        refetchComplete();
         toast.success(`${item.task.taskTitle} added in ongoing`)
       } catch (error) {
         toast.error('Error updating task type:', error);
@@ -36,6 +37,7 @@ const axiosSecure = useAxiosSecure();
         await axiosSecure.patch(`/updateTaskType/${taskId}`, { taskType: "complete" });
         refetchToDo();
         refetchComplete();
+        refetchOngoing();
         toast.success(`${item.task.taskTitle} added in complete`)
       } catch (error) {
         toast.error('Error updating task type:', error);
@@ -59,7 +61,7 @@ const axiosSecure = useAxiosSecure();
             <p className="text-center">Loading...</p>
           ) : (
             
-            allToDoTask.map((task) => <Task key={task._id} task={task} />)
+            allToDoTask.map((task) => <Task key={task._id} refetch={refetchToDo} task={task} />)
           )}
         </div>
 
@@ -72,7 +74,7 @@ const axiosSecure = useAxiosSecure();
             <p className="text-center">Loading...</p>
           ) : (
             
-            allOngoingTask.map((task) => <Task key={task._id} task={task} />)
+            allOngoingTask.map((task) => <Task key={task._id} refetch={refetchOngoing} task={task} />)
           )}
         </div>
           <div ref={completedTaskDrop} className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
@@ -83,7 +85,7 @@ const axiosSecure = useAxiosSecure();
             <p className="text-center">Loading...</p>
           ) : (
             
-            allCompleteTask.map((task) => <Task key={task._id} task={task} />)
+            allCompleteTask.map((task) => <Task key={task._id} refetch={refetchComplete} task={task} />)
           )}
         </div>
         </div>

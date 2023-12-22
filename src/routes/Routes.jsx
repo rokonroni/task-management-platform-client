@@ -12,6 +12,8 @@ import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import PrivateRoute from "./PrivateRoute";
 import ToDo from "../pages/ToDo/ToDo";
 import UpdateTask from "../pages/UpdateTask/UpdateTask";
+import OngoingTask from "../pages/OngoingTask/OngoingTask";
+import CompleteTask from "../pages/CompleteTask/CompleteTask";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: "toDo",
         element: <PrivateRoute><ToDo /></PrivateRoute>,
+      },
+      {
+        path: "ongoing",
+        element: <PrivateRoute><OngoingTask /></PrivateRoute>,
+      },
+      {
+        path: "completed",
+        element: <PrivateRoute><CompleteTask /></PrivateRoute>,
       },
       
       {
