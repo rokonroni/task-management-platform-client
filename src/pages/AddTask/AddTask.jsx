@@ -42,7 +42,7 @@ const AddTask = () => {
       <div>
         <SectionTitle title={"Add Task"} subTitle={"What's new?"} />
       </div>
-      <div className="bg-base-200 p-4 ">
+      <div className=" p-4 ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label
             className="block font-medium text-gray-600 dark:text-gray-200"

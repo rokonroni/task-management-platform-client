@@ -10,6 +10,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import PrivateRoute from "./PrivateRoute";
+import ToDo from "../pages/ToDo/ToDo";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "addTask",
         element: <PrivateRoute><AddTask /></PrivateRoute>,
+      },
+      {
+        path: "toDo",
+        element: <PrivateRoute><ToDo /></PrivateRoute>,
       },
       
     ],

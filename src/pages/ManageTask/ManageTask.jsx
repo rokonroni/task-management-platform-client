@@ -3,30 +3,44 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import useGetTasks from "../../hooks/useGetTasks";
 import Task from "../../components/Task/Task";
 import { useDrop } from "react-dnd";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const ManageTask = () => {
-  // In your ManageTask component
 const { allTask: allToDoTask, isPending: isPendingToDo, refetch: refetchToDo } = useGetTasks("getToDoTask", "to-do");
 const { allTask: allOngoingTask, isPending: isPendingOngoing, refetch: refetchOngoing } = useGetTasks("getOngoingTask", "ongoing");
 const { allTask: allCompleteTask, isPending: isPendingComplete, refetch: refetchComplete } = useGetTasks("getCompleteTask", "complete");
-
-
-console.log(allToDoTask, allOngoingTask, allCompleteTask);
+const axiosSecure = useAxiosSecure();
 
   const [, ongoingTaskDrop] = useDrop({
     accept: 'TODO_ITEM',
-    drop: (item) => {
+    drop: async  (item) => {
+        const taskId = item.task._id;
+      try {
+        await axiosSecure.patch(`/updateTaskType/${taskId}`, { taskType: "ongoing" });
+        refetchToDo();
+        refetchOngoing();
+        toast.success(`${item.task.taskTitle} added in ongoing`)
+      } catch (error) {
+        toast.error('Error updating task type:', error);
+      }
       
-      console.log('Dropped into Ongoing Task:', item.task);
     },
   });
 
   const [, completedTaskDrop] = useDrop({
     accept: 'TODO_ITEM',
-    drop: (item) => {
-      // Call your API to update the task status to "completed"
-      // Use item.task to get the dropped task data
-      console.log('Dropped into Completed Task:', item.task);
+     drop: async  (item) => {
+        const taskId = item.task._id;
+      try {
+        await axiosSecure.patch(`/updateTaskType/${taskId}`, { taskType: "complete" });
+        refetchToDo();
+        refetchComplete();
+        toast.success(`${item.task.taskTitle} added in complete`)
+      } catch (error) {
+        toast.error('Error updating task type:', error);
+      }
+      
     },
   });
 

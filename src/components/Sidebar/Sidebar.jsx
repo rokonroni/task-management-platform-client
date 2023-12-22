@@ -1,6 +1,6 @@
 import Logo from "../../assets/logo.png";
 import { RxDashboard } from "react-icons/rx";
-import { CiLogout } from "react-icons/ci";
+import { CiBoxList, CiLogout } from "react-icons/ci";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MdAddTask } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
@@ -41,6 +41,22 @@ const Sidebar = () => {
                 >
                   <RxDashboard className="h-5 w-5" />
                   <span className="-mr-1 font-medium">Dashboard</span>
+                </NavLink>
+              </li>
+              <li className="min-w-max">
+                <NavLink
+                  to="/dashboard/toDo"
+                  end={true}
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "bg-none"
+                      : isActive
+                      ? "relative flex items-center space-x-4 bg-gradient-to-r from-sky-600 to-cyan-400 px-4 py-3 text-white"
+                      : "relative flex items-center space-x-4 px-4 py-3"
+                  }
+                >
+                  <CiBoxList className="h-5 w-5" />
+                  <span className="-mr-1 font-medium">To Do Task</span>
                 </NavLink>
               </li>
               <li className="min-w-max">
