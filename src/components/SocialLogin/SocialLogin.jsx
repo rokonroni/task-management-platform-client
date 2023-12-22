@@ -1,16 +1,18 @@
-import React from 'react';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAuth from '../../hooks/useAuth';
 
 const SocialLogin = () => {
     const location = useLocation();
   const navigate = useNavigate();
+  const {githubLogin, googleLogin} = useAuth();
 
     const handleSocialLogin = (media) => {
     media()
       .then(() => {
         Swal.fire("Login Successful!", "Welcome to our website!", "success");
-        navigate(location?.state ? location.state : '/');
+        navigate(location?.state ? location.state.from : '/');
       })
       .catch((error) => {
         Swal.fire({

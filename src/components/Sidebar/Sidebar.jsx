@@ -1,12 +1,22 @@
 import Logo from "../../assets/logo.png";
 import { RxDashboard } from "react-icons/rx";
 import { CiLogout } from "react-icons/ci";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdAddTask } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 
 const Sidebar = () => {
+  const { logOut} = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () =>{
+   logOut()
+    .then(() => {
+      navigate('/');
+    })
+  }
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 lg:hover:w-60  md:w-60 hover:bg-white lg:bg-white hover:shadow-lg">
@@ -70,7 +80,7 @@ const Sidebar = () => {
           </div>
           <div className="w-max -mb-3">
             <button
-              href="#"
+              onClick={handleLogout}
               className="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
             >
               <CiLogout className="h-5 w-5"/>

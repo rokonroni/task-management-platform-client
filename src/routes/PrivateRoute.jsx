@@ -4,15 +4,17 @@ import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types"
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-    const location = useLocation();
+  const location = useLocation();
 
 
 
     if (loading) {
         return <>
-          <div className="min-h-screen text-center w-full">
-            <img className="w-3/4" src='img' />
-          </div>
+          <div className="min-h-screen text-center flex items-center justify-center w-full">
+          <span className="loading loading-bars loading-lg"></span>
+          <span className="loading loading-ball loading-lg"></span>
+          <span className="loading loading-bars loading-lg"></span>
+        </div>
         </>
     }
   if (user) {

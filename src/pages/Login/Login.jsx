@@ -9,7 +9,6 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;

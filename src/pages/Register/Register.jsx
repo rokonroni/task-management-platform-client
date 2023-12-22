@@ -1,32 +1,30 @@
-/* eslint-disable no-useless-escape */
-import { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import axios from "axios";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { signUp, updateUserProfile } = useAuth();
   const navigate = useNavigate();
-  const fileInputRef = useRef(null);
-  const axiosPublic = useAxiosPublic();
+   const location = useLocation();
+
   const {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm();
 
- 
-
-
-  const onSubmit = async (data) => {
-    
+ const onSubmit = (data) => {
+    signUp(data.email, data.password).then(() => {
+      reset();
+      updateUserProfile(data.name, data.photoURL).then(() => {
+        toast.success("User created Successfully")
+        navigate(location?.state ? location.state : '/');
+      });
+    });
   };
 
   return (
@@ -43,12 +41,13 @@ const Register = () => {
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
-                htmlFor="LoggingEmailAddress"
+                htmlFor="name"
               >
                 Name
                 <span className="text-red-600">*</span>
               </label>
               <input
+              id="name"
                 type="text"
                 name="name"
                 {...register("name", { required: true })}
@@ -57,6 +56,26 @@ const Register = () => {
               />
               {errors.name && (
                 <span className="text-red-600 mt-2 ">*Name is required</span>
+              )}
+            </div>
+            <div className="mt-4">
+              <label
+                className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                htmlFor="photoURL"
+              >
+                Photo URL
+                <span className="text-red-600">*</span>
+              </label>
+              <input
+              id="photoURL"
+                type="text"
+                name="photoURL"
+                {...register("photoURL", { required: true })}
+                placeholder="Enter your photo URL"
+                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+              />
+              {errors.photoURL && (
+                <span className="text-red-600 mt-2 ">*Photo URL is required</span>
               )}
             </div>
             <div className="mt-4">
@@ -103,22 +122,22 @@ const Register = () => {
               />
 
               {errors.password?.type === "required" && (
-                <span className="text-blue-600 mt-2 ">
+                <span className="text-red-600 mt-2 ">
                   *Password is required
                 </span>
               )}
               {errors.password?.type === "minLength" && (
-                <span className="text-blue-600 mt-2 ">
+                <span className="text-red-600 mt-2 ">
                   *Password must be 8 characters
                 </span>
               )}
               {errors.password?.type === "maxLength" && (
-                <span className="text-blue-600 mt-2 ">
+                <span className="text-red-600 mt-2 ">
                   *Password must be less then 20 characters
                 </span>
               )}
               {errors.password?.type === "pattern" && (
-                <span className="text-blue-600 mt-2 ">
+                <span className="text-red-600 mt-2 ">
                   *Minimum eight characters, at least one letter, one number and
                   one special character
                 </span>
@@ -127,8 +146,7 @@ const Register = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-              >
+                className="btn btn-active w-full bg-gradient-to-r hover:bg-gradient-to-l from-sky-600 to-cyan-400 px-4 py-2 rounded-lg text-white">
                 Sign Up
               </button>
             </div>

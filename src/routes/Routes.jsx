@@ -8,6 +8,8 @@ import ManageTask from "../pages/ManageTask/ManageTask";
 import AddTask from "../pages/AddTask/AddTask";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -27,23 +29,27 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
+      {
+        path: "resetPassword",
+        element: <ResetPassword />,
+      },
     ],
   },
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: <PrivateRoute><Dashboard /></PrivateRoute>,
     children: [
       {
         index: true,
-        element: <DashBoard />
+        element: <PrivateRoute><DashBoard /></PrivateRoute>
       },
       {
         path: "manageTask",
-        element: <ManageTask />,
+        element: <PrivateRoute><ManageTask /></PrivateRoute>,
       },
       {
         path: "addTask",
-        element: <AddTask />,
+        element: <PrivateRoute><AddTask /></PrivateRoute>,
       },
       
     ],
