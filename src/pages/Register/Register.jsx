@@ -22,7 +22,7 @@ const Register = () => {
       reset();
       updateUserProfile(data.name, data.photoURL).then(() => {
         toast.success("User created Successfully")
-        navigate(location?.state ? location.state : '/');
+        navigate(location?.state ? location.state : '/dashboard');
       });
     });
   };

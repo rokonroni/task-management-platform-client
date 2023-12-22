@@ -11,6 +11,7 @@ import Register from "../pages/Register/Register";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import PrivateRoute from "./PrivateRoute";
 import ToDo from "../pages/ToDo/ToDo";
+import UpdateTask from "../pages/UpdateTask/UpdateTask";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
       {
         path: "toDo",
         element: <PrivateRoute><ToDo /></PrivateRoute>,
+      },
+      
+      {
+        path: "updateTask/:id",
+        element: <PrivateRoute><UpdateTask /></PrivateRoute>
       },
       
     ],

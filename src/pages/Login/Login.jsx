@@ -16,7 +16,7 @@ const Login = () => {
     signIn(email, password)
       .then(() => {
         Swal.fire("Login Successful!", "Welcome to our website!", "success");
-        navigate(location?.state ? location.state : '/');
+        navigate(location?.state ? location.state : '/dashboard');
       })
       .catch((error) => {
         Swal.fire({

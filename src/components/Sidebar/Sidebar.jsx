@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 
 
 const Sidebar = () => {
-  const { logOut} = useAuth();
+  const {user, logOut} = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () =>{
@@ -19,7 +19,7 @@ const Sidebar = () => {
   }
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 lg:hover:w-60  md:w-60 hover:bg-white lg:bg-white hover:shadow-lg">
+      <div className="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r hover:w-56 lg:hover:w-64  md:w-64 hover:bg-white lg:bg-white hover:shadow-lg">
         <div className="flex h-screen flex-col justify-between pt-2 pb-6">
           <div>
             <div className=" flex  w-full  items-center justify-center p-2.5">
@@ -95,9 +95,18 @@ const Sidebar = () => {
             </ul>
           </div>
           <div className="w-max -mb-3">
+            <div className="px-2">
+              <div className="flex justify-center items-center gap-2 ">
+                <img  className="w-12 h-12 rounded-full" src= {user.photoURL} alt="" />
+                <div>
+                  <h1>{user.displayName}</h1>
+                <p>{user.email}</p>
+                </div>
+              </div>
+            </div>
             <button
               onClick={handleLogout}
-              className="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
+              className="group flex items-center space-x-4 border-t-2 mt-3  border-dashed rounded-md px-4 py-3 text-gray-600"
             >
               <CiLogout className="h-5 w-5"/>
               <span className="group-hover:text-gray-700">Logout</span>

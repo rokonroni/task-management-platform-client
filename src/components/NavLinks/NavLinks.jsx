@@ -47,6 +47,20 @@ const NavLinks = () => {
           Contact Us
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/blog"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "bg-none"
+              : isActive
+              ? "text-blue-600 font-bold  text-lg "
+              : "font-bold  text-lg hover:bg-transparent hover:text-blue-600 focus:bg-white"
+          }
+        >
+          Blog
+        </NavLink>
+      </li>
      
     </>
   );

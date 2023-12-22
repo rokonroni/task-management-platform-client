@@ -12,7 +12,7 @@ const SocialLogin = () => {
     media()
       .then(() => {
         Swal.fire("Login Successful!", "Welcome to our website!", "success");
-        navigate(location?.state ? location.state.from : '/');
+        navigate(location?.state ? location.state.from : '/`dashboard');
       })
       .catch((error) => {
         Swal.fire({

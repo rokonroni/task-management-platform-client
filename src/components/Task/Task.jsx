@@ -53,7 +53,7 @@ const Task = ({task}) => {
           </p>
           <div className="flex justify-center text-xl w-max-fit gap-4 px-8 my-4 ">
             <Link
-              to={`/update-task/${task._id}`}
+              to={`/dashboard/updateTask/${task._id}`}
               className="btn btn-active bg-gradient-to-r hover:bg-gradient-to-l from-sky-600 to-cyan-400 px-4 py-2 w-1/2 rounded-lg text-white"
             >
               Update Task
