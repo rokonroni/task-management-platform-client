@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const AddTask = () => {
   const {
@@ -12,6 +13,7 @@ const AddTask = () => {
     formState: { errors },
   } = useForm();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const onSubmit = async (data) => {
     const taskItem = {
@@ -19,9 +21,12 @@ const AddTask = () => {
       taskPriority: data.taskPriority,
       taskDescription: data.taskDescription,
       taskDeadline: data.lastDate,
-      taskType: "to-do"
+      taskType: "to-do",
+      userName: user.displayName,
+      userEmail: user.email,
+      taskAddDate: new Date(),
     };
-    
+
     const taskResponse = await axiosSecure.post("/tasks", taskItem);
     if (taskResponse.data.insertedId) {
       reset();
@@ -114,7 +119,7 @@ const AddTask = () => {
           <textarea
             id="taskDescription"
             {...register("taskDescription", { required: true })}
-            placeholder="Recipe Details"
+            placeholder="Write task desciption here"
             className="textarea w-full block p-3 rounded-lg my-3 textarea-bordered textarea-xl resize-none border focus-visible:outline-gray-400"
           ></textarea>
           {errors.taskDescription && (
