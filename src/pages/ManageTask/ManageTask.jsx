@@ -51,9 +51,11 @@ const axiosSecure = useAxiosSecure();
       <Helmet>
         <title>DashBoard || Task Management</title>
       </Helmet>
+      <div data-aos="flip-up">
       <SectionTitle title={"Manage Task"} subTitle={"Manage your tasks"} />
-      <div className="flex  flex-col md:flex-row gap-6 ">
-        <div className="flex-1 w-full min-h-max border border-gray-200 border-dashed">
+      </div>
+      <div  className="flex  flex-col md:flex-row gap-6 ">
+        <div data-aos="fade-right" className="flex-1 w-full min-h-max border border-gray-200 border-dashed">
           <h1 className="text-center text-2xl py-4 border-b">Todo List</h1>
 
           {isPendingToDo ? (
@@ -65,8 +67,8 @@ const axiosSecure = useAxiosSecure();
           )}
         </div>
 
-        <div className=" w-full flex-1 flex-col ">
-          <div ref={ongoingTaskDrop} className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
+        <div  className=" w-full flex-1 flex-col ">
+          <div data-aos="fade-down" ref={ongoingTaskDrop} className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
           <h1 className="text-center text-2xl py-4 border-b">Ongoing Task</h1>
 
           {isPendingOngoing ? (
@@ -77,7 +79,7 @@ const axiosSecure = useAxiosSecure();
             allOngoingTask.map((task) => <Task key={task._id} refetch={refetchOngoing} task={task} />)
           )}
         </div>
-          <div ref={completedTaskDrop} className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
+          <div data-aos="fade-up" ref={completedTaskDrop} className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
           <h1 className="text-center text-2xl py-4 border-b">Complete Task</h1>
 
           {isPendingComplete ? (

@@ -8,9 +8,12 @@ const DashBoard = () => {
       <Helmet>
         <title>DashBoard || Task Management</title>
       </Helmet>
-      <SectionTitle title={"Dashboard"} subTitle={"See your Dashboard"} />
+      <div data-aos="flip-up">
+
+      <SectionTitle  title={"Dashboard"} subTitle={"See your Dashboard"} />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-        <div className="mt-4 bg-gray-200 px-4 py-5  w-full  rounded-xl shadow-xl">
+        <div data-aos="fade-right" className="mt-4 bg-gray-200 px-4 py-5  w-full  rounded-xl shadow-xl">
           <div className="flex items-center rounded-md">
             <div className="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
               <FaTasks className="text-white text-2xl " />
@@ -21,7 +24,7 @@ const DashBoard = () => {
             </div>
           </div>
         </div>
-        <div className="mt-4 bg-gray-200 px-4 py-5  w-full  rounded-xl shadow-xl">
+        <div data-aos="fade-left" className="mt-4 bg-gray-200 px-4 py-5  w-full  rounded-xl shadow-xl">
           <div className="flex items-center rounded-md">
             <div className="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
               <FaTasks className="text-white text-2xl " />

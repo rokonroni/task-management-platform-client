@@ -8,13 +8,13 @@ const OngoingTask = () => {
     const { allTask: allOngoingTask, isPending: isPendingOngoing, refetch: refetchOngoing } = useGetTasks("getOngoingTask", "ongoing");
     return (
         <>
-        <div>
+        <div data-aos="flip-up">
         <Helmet>
           <title>DashBoard || Ongoing Task</title>
         </Helmet>
         <SectionTitle title={"Ongoing List"} subTitle={"Let's Finish the task"} />
       </div>
-            <div  className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
+            <div data-aos="fade-down" className="flex-1 w-full min-h-[30vh] border border-gray-200 border-dashed ">
           <h1 className="text-center text-2xl py-4 border-b">Ongoing Task</h1>
 
           {isPendingOngoing ? (

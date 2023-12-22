@@ -3,8 +3,8 @@ import NavLinks from "../NavLinks/NavLinks";
 const Navbar = () => {
 
   return (
-    <div >
-      <div className="navbar lg:fixed overflow-hidden max-w-7xl  lg:bg-black/40 bg-gray-700 text-white">
+    <div data-aos="fade-down" >
+      <div className="navbar lg:fixed z-10 overflow-hidden max-w-7xl  lg:bg-black/40 bg-gray-700 text-white">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

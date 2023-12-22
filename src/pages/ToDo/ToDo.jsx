@@ -9,13 +9,13 @@ const ToDo = () => {
     
   return (
     <>
-      <div>
+      <div data-aos="flip-up">
         <Helmet>
           <title>DashBoard || Task Management</title>
         </Helmet>
         <SectionTitle title={"To Do List"} subTitle={"What to do?"} />
       </div>
-      <div>
+      <div data-aos="fade-down">
         <div className="flex-1 w-full min-h-max border border-gray-200 border-dashed">
           <h1 className="text-center text-2xl py-4 border-b">Todo List</h1>
 

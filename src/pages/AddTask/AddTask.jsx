@@ -39,10 +39,10 @@ const AddTask = () => {
       <Helmet>
         <title>Add Task</title>
       </Helmet>
-      <div>
+      <div data-aos="flip-up">
         <SectionTitle title={"Add Task"} subTitle={"What's new?"} />
       </div>
-      <div className=" p-4 ">
+      <div data-aos="fade-down" className=" p-4 ">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label
             className="block font-medium text-gray-600 dark:text-gray-200"
